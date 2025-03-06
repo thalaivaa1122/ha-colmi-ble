@@ -15,19 +15,6 @@ if TYPE_CHECKING:
     from .coordinator import BlueprintDataUpdateCoordinator
     from .data import ColmiRingConfigEntry
 
-ENTITY_DESCRIPTIONS = (
-    ButtonEntityDescription(
-        key="colmi_ring",
-        name="Blink Twice",
-        icon="mdi:format-quote-close",
-    ),
-    ButtonEntityDescription(
-        key="colmi_ring",
-        name="Reboot",
-        icon="mdi:format-quote-close",
-    ),
-)
-
 
 async def async_setup_entry(
     hass: HomeAssistant,  # noqa: ARG001 Unused function argument: `hass`
@@ -40,7 +27,7 @@ async def async_setup_entry(
             ColmiRingBlinkButton(
                 coordinator=entry.runtime_data.coordinator,
                 entity_description=ButtonEntityDescription(
-                    key="colmi_ring",
+                    key="colmi_ring_blink_button",
                     name="Blink Twice",
                     icon="mdi:format-quote-close",
                 ),
@@ -48,9 +35,9 @@ async def async_setup_entry(
             ColmiRingBlinkButton(
                 coordinator=entry.runtime_data.coordinator,
                 entity_description=ButtonEntityDescription(
-                    key="colmi_ring",
+                    key="colmi_ring_reboot_button",
                     name="Reboot",
-                    icon="mdi:format-quote-close",
+                    icon="mdi:restart",
                 ),
             ),
         ]

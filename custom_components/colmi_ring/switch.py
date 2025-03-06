@@ -17,7 +17,7 @@ if TYPE_CHECKING:
 
 ENTITY_DESCRIPTIONS = (
     SwitchEntityDescription(
-        key="colmi_ring",
+        key="colmi_ring_switch",
         name="Integration Switch",
         icon="mdi:format-quote-close",
     ),

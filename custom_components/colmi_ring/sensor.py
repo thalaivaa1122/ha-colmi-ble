@@ -17,8 +17,8 @@ if TYPE_CHECKING:
 
 ENTITY_DESCRIPTIONS = (
     SensorEntityDescription(
-        key="colmi_ring",
-        name="Integration Sensor",
+        key="colmi_ring_sensor",
+        name="Heart Rate",
         icon="mdi:format-quote-close",
     ),
 )
