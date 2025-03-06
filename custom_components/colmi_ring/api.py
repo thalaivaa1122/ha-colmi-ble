@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import datetime
 import socket
 from typing import Any
@@ -82,15 +81,6 @@ class ColmiRingApiClient:
         async with client.Client(self._ring_address) as ring_client:
             return await ring_client.blink_twice()
 
-    def blink_twice(self) -> Any:
-        """Synchronous version of async_blink_twice."""
-        loop = asyncio.get_event_loop()
-        return loop.run_until_complete(self.async_blink_twice())
-
     async def async_reboot(self) -> Any:
         async with client.Client(self._ring_address) as ring_client:
             return await ring_client.reboot()
-
-    def reboot(self) -> Any:
-        loop = asyncio.get_event_loop()
-        return loop.run_until_complete(self.async_reboot())

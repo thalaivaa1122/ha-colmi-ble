@@ -69,9 +69,13 @@ class ColmiRingBlinkButton(ColmiRingEntity, ButtonEntity):
         super().__init__(coordinator)
         self.entity_description = entity_description
 
-    def press(self) -> None:
-        """Press the button."""
-        self.coordinator.config_entry.runtime_data.client.blink_twice()
+        def press(self) -> None:
+            """Press the button."""
+            self.hass.async_create_task(self.async_press())
+
+        async def async_press(self) -> None:
+            """Press the button."""
+            await self.coordinator.config_entry.runtime_data.client.async_blink_twice()
 
 
 class ColmiRingRebootButton(ColmiRingEntity, ButtonEntity):
@@ -88,4 +92,8 @@ class ColmiRingRebootButton(ColmiRingEntity, ButtonEntity):
 
     def press(self) -> None:
         """Press the button."""
-        self.coordinator.config_entry.runtime_data.client.reboot()
+        self.hass.async_create_task(self.async_press())
+
+    async def async_press(self) -> None:
+        """Press the button."""
+        await self.coordinator.config_entry.runtime_data.client.async_reboot()
