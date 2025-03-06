@@ -1,6 +1,6 @@
 {
-  "domain": "integration_blueprint",
-  "name": "Integration blueprint",
+  "domain": "colmi_ring",
+  "name": "Colmi Ring",
   "codeowners": [
     "@ludeeus"
   ],

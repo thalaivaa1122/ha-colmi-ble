@@ -2,10 +2,9 @@
     "config": {
         "step": {
             "user": {
-                "description": "If you need help with the configuration have a look here: https://github.com/ludeeus/integration_blueprint",
+                "description": "Address of your ring. This can by found using Gadgetbridge on Android, or running \"colmi_r02_util scan\" on a bluetooth-enabled PC as described at https://github.com/tahnok/colmi_r02_client",
                 "data": {
-                    "username": "Username",
-                    "password": "Password"
+                    "address": "Address"
                 }
             }
         },

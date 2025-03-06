@@ -1,4 +1,4 @@
-"""Custom types for integration_blueprint."""
+"""Custom types for colmi_ring."""
 
 from __future__ import annotations
 
@@ -9,17 +9,17 @@ if TYPE_CHECKING:
     from homeassistant.config_entries import ConfigEntry
     from homeassistant.loader import Integration
 
-    from .api import IntegrationBlueprintApiClient
+    from .api import ColmiRingApiClient
     from .coordinator import BlueprintDataUpdateCoordinator
 
 
-type IntegrationBlueprintConfigEntry = ConfigEntry[IntegrationBlueprintData]
+type ColmiRingConfigEntry = ConfigEntry[ColmiRingData]
 
 
 @dataclass
-class IntegrationBlueprintData:
+class ColmiRingData:
     """Data for the Blueprint integration."""
 
-    client: IntegrationBlueprintApiClient
+    client: ColmiRingApiClient
     coordinator: BlueprintDataUpdateCoordinator
     integration: Integration
