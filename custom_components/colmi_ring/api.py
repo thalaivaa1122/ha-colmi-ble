@@ -63,11 +63,11 @@ class ColmiRingApiClient:
                 if isinstance(entry, client.hr.HeartRateLog):
                     heart_rate_entries.extend(
                         entry.heart_rates_with_times()
-                    )  # [(timestamp, rate), ...]
+                    )  # [(heart rate, timestamp), ...]
 
             # Get the most recent heart rate
             if heart_rate_entries:
-                latest_heart_rate, _ = max(heart_rate_entries, key=lambda x: x[0])
+                latest_heart_rate, _ = max(heart_rate_entries, key=lambda x: x[1])
                 # TODO: return more complex info, like the timestamp dropped on prev line.
                 return {"heart_rate": latest_heart_rate}
 
