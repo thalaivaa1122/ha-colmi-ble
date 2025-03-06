@@ -29,10 +29,10 @@ async def async_setup_entry(
                 entity_description=ButtonEntityDescription(
                     key="colmi_ring_blink_button",
                     name="Blink Twice",
-                    icon="mdi:format-quote-close",
+                    icon="mdi:eye-outline",
                 ),
             ),
-            ColmiRingBlinkButton(
+            ColmiRingRebootButton(
                 coordinator=entry.runtime_data.coordinator,
                 entity_description=ButtonEntityDescription(
                     key="colmi_ring_reboot_button",
@@ -56,13 +56,13 @@ class ColmiRingBlinkButton(ColmiRingEntity, ButtonEntity):
         super().__init__(coordinator)
         self.entity_description = entity_description
 
-        def press(self) -> None:
-            """Press the button."""
-            self.hass.async_create_task(self.async_press())
+    def press(self) -> None:
+        """Press the button."""
+        self.hass.async_create_task(self.async_press())
 
-        async def async_press(self) -> None:
-            """Press the button."""
-            await self.coordinator.config_entry.runtime_data.client.async_blink_twice()
+    async def async_press(self) -> None:
+        """Press the button."""
+        await self.coordinator.config_entry.runtime_data.client.async_blink_twice()
 
 
 class ColmiRingRebootButton(ColmiRingEntity, ButtonEntity):
