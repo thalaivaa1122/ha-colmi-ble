@@ -44,6 +44,7 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
                 _errors["base"] = "unknown"
             else:
                 await self.async_set_unique_id(
+                    # TODO
                     ## Do NOT use this in production code
                     ## The unique_id should never be something that can change
                     ## https://developers.home-assistant.io/docs/config_entries_config_flow_handler#unique-ids
