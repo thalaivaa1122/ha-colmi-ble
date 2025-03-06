@@ -62,7 +62,9 @@ class ColmiRingApiClient:
             for entry in full_data.heart_rates:
                 if isinstance(entry, client.hr.HeartRateLog):
                     heart_rate_entries.extend(
-                        entry.heart_rates_with_times()
+                        # Filter out 0's. Since we have 5m intervals and heart rate
+                        # is only measured every 15 minutes, most entries are 0.
+                        [r for r in entry.heart_rates_with_times() if r[0] > 0]
                     )  # [(heart rate, timestamp), ...]
 
             # Get the most recent heart rate

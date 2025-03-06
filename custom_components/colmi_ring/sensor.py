@@ -20,7 +20,7 @@ ENTITY_DESCRIPTIONS = (
     SensorEntityDescription(
         key="colmi_ring_sensor",
         name="Heart Rate",
-        icon="mdi:monitor-heart-rate",
+        icon="mdi:heart-pulse",
     ),
 )
 
