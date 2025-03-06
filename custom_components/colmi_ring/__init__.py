@@ -16,7 +16,7 @@ from homeassistant.loader import async_get_loaded_integration
 
 from .api import ColmiRingApiClient
 from .const import DOMAIN, LOGGER
-from .coordinator import BlueprintDataUpdateCoordinator
+from .coordinator import ColmiRingDataUpdateCoordinator
 from .data import ColmiRingData
 
 if TYPE_CHECKING:
@@ -36,7 +36,7 @@ async def async_setup_entry(
     entry: ColmiRingConfigEntry,
 ) -> bool:
     """Set up this integration using UI."""
-    coordinator = BlueprintDataUpdateCoordinator(
+    coordinator = ColmiRingDataUpdateCoordinator(
         hass=hass,
         logger=LOGGER,
         name=DOMAIN,

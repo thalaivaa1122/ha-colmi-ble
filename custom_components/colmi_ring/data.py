@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from homeassistant.loader import Integration
 
     from .api import ColmiRingApiClient
-    from .coordinator import BlueprintDataUpdateCoordinator
+    from .coordinator import ColmiRingDataUpdateCoordinator
 
 
 type ColmiRingConfigEntry = ConfigEntry[ColmiRingData]
@@ -21,5 +21,5 @@ class ColmiRingData:
     """Data for the Blueprint integration."""
 
     client: ColmiRingApiClient
-    coordinator: BlueprintDataUpdateCoordinator
+    coordinator: ColmiRingDataUpdateCoordinator
     integration: Integration
