@@ -49,30 +49,29 @@ class ColmiRingApiClient:
         self._ring_address = ring_address
         self._colmi_client = client.Client(self._ring_address)
 
+    async def async_get_data(self) -> Any:
+        """Get the most recent heart rate from the API."""
+        end_time = datetime.datetime.now(datetime.timezone.utc)  # Current UTC time
+        start_time = end_time - datetime.timedelta(hours=1)  # One hour ago
 
-async def async_get_data(self) -> Any:
-    """Get the most recent heart rate from the API."""
-    end_time = datetime.datetime.now(datetime.timezone.utc)  # Current UTC time
-    start_time = end_time - datetime.timedelta(hours=1)  # One hour ago
+        async with client.Client(self._ring_address) as ring_client:
+            full_data = await ring_client.get_full_data(start_time, end_time)
 
-    async with client.Client(self._ring_address) as ring_client:
-        full_data = await ring_client.get_full_data(start_time, end_time)
+            # Extract heart rates with timestamps
+            heart_rate_entries = []
+            for entry in full_data.heart_rates:
+                if isinstance(entry, client.hr.HeartRateLog):
+                    heart_rate_entries.extend(
+                        entry.heart_rates_with_times()
+                    )  # [(timestamp, rate), ...]
 
-        # Extract heart rates with timestamps
-        heart_rate_entries = []
-        for entry in full_data.heart_rates:
-            if isinstance(entry, client.hr.HeartRateLog):
-                heart_rate_entries.extend(
-                    entry.heart_rates_with_times()
-                )  # [(timestamp, rate), ...]
+            # Get the most recent heart rate
+            if heart_rate_entries:
+                _, latest_heart_rate = max(heart_rate_entries, key=lambda x: x[0])
+                # TODO: return more complex info, like the timestamp dropped on prev line.
+                return latest_heart_rate
 
-        # Get the most recent heart rate
-        if heart_rate_entries:
-            _, latest_heart_rate = max(heart_rate_entries, key=lambda x: x[0])
-            # TODO: return more complex info, like the timestamp dropped on prev line.
-            return latest_heart_rate
-
-        return None  # No heart rate data available
+            return None  # No heart rate data available
 
     async def async_set_time(self, value: datetime.datetime) -> Any:
         async with client.Client(self._ring_address) as ring_client:
