@@ -41,6 +41,9 @@ def _verify_response_or_raise(response: aiohttp.ClientResponse) -> None:
 class ColmiRingApiClient:
     """Sample API Client."""
 
+    # TODO: refactor the client's internal Bleak client to obey these rules
+    # https://developers.home-assistant.io/docs/bluetooth#best-practices-for-integration-authors
+
     def __init__(self, ring_address: str) -> None:
         """Sample API Client."""
         self._ring_address = ring_address
