@@ -40,7 +40,8 @@ async def async_setup_entry(
         hass=hass,
         logger=LOGGER,
         name=DOMAIN,
-        update_interval=timedelta(hours=1),
+        # TODO: think about a good value here. This probably eats battery.
+        update_interval=timedelta(minutes=5),
     )
     entry.runtime_data = ColmiRingData(
         client=ColmiRingApiClient(ring_address=entry.data[CONF_ADDRESS]),
@@ -49,6 +50,8 @@ async def async_setup_entry(
     )
 
     # https://developers.home-assistant.io/docs/integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities
+    # TODO: When code is stable, this could become coordinator.async_refresh() which ignores errors
+    # from the first refresh.
     await coordinator.async_config_entry_first_refresh()
 
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
